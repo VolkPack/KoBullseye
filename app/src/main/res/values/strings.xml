@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KoBullseye</string>
+    <string name="instruction_text">PUT THE BULLSEYE AS CLOSE AS YOU CAN TO</string>
+    <string name="min_slider_value">1</string>
+    <string name="max_slider_value">100</string>
+    <string name="hit_me_button_text">HIT ME</string>
+    <string name="target_value_text">89</string>
+</resources>
