@@ -1,6 +1,7 @@
 package com.volks.kobullseye
 
 import android.graphics.drawable.GradientDrawable.Orientation
+import android.provider.CalendarContract.Colors
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -69,7 +70,7 @@ fun GameScreen(){
             Button(onClick = { /*TODO*/ }) {
                 Text(
                     text = stringResource(R.string.hit_me_button_text),
-                    color = Color.Red,
+                    color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Serif
                 )
