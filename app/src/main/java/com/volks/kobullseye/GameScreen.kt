@@ -22,10 +22,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupPositionProvider
 import com.volks.kobullseye.ui.theme.KoBullseyeTheme
+import kotlin.random.Random
+
 //TEST
 @Composable
 fun GameScreen(){
+    var number = GenerateRandomNumber()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -39,17 +44,31 @@ fun GameScreen(){
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.weight(9f)
         ) {
+            /**
+             * Instruction Text
+             **/
             Text(
                 stringResource(R.string.instruction_text),
                 fontWeight = FontWeight.Bold,
                 color = Color.Red,
                 textAlign = TextAlign.Center,
                 )
-            Text(text = stringResource(R.string.target_value_text), fontSize = 52.sp, fontWeight = FontWeight.Bold, color = Color.Red)
+            /**
+             * Target Value
+             **/
+            Text(
+                //text = stringResource(R.string.target_value_text),
+                text = number.toString(),
+                fontSize = 52.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Red)
 
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                /**
+                 * Min Slider Value Text
+                 **/
                 Text(
                     text = stringResource(R.string.min_slider_value),
                     textAlign = TextAlign.Center,
@@ -61,13 +80,24 @@ fun GameScreen(){
                     onValueChange = {},
                     modifier = Modifier.weight(1f)
                 )
+                /**
+                 * Max Slider Value Text
+                 **/
                 Text(
                     text = stringResource(R.string.max_slider_value),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(end = 16.dp)
                     )
             }
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = {
+                            /**TODO Add Button Functionality
+                            * Open PopUp
+                            * Check if Number Matches
+                            **/
+
+
+                            }
+                    ) {
                 Text(
                     text = stringResource(R.string.hit_me_button_text),
                     color = Color.White,
@@ -88,4 +118,9 @@ fun GameScreenPreview() {
     KoBullseyeTheme {
         GameScreen()
     }
+}
+
+fun GenerateRandomNumber():Int{
+    var number :Int = Random.nextInt(100)
+    return number
 }
