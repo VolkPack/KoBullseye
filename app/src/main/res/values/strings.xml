@@ -5,4 +5,7 @@
     <string name="max_slider_value">100</string>
     <string name="hit_me_button_text">HIT ME</string>
     <string name="target_value_text">89</string>
+    <string name="result_dialog_button_text">This is An Alert\n</string>
+    <string name="result_dialog_title">This Is my First Pop Up</string>
+    <string name="result_dialog_message">Awesome!</string>
 </resources>
