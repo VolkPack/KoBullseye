@@ -16,6 +16,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,9 +40,10 @@ import kotlin.random.Random
 
 //TEST
 @Composable
-fun GameScreen(){
+fun GameScreen() {
     var number = GenerateRandomNumber()
-    var alertIsVisible: Boolean = false
+    var alertIsVisible by remember { mutableStateOf(false) }
+    var num by remember { mutableStateOf(Random.nextInt(100)) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -60,16 +65,18 @@ fun GameScreen(){
                 fontWeight = FontWeight.Bold,
                 color = Color.Red,
                 textAlign = TextAlign.Center,
-                )
+            )
             /**
              * Target Value
              **/
             Text(
+
                 //text = stringResource(R.string.target_value_text),
-                text = number.toString(),
+                text = num.toString(),
                 fontSize = 52.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Red)
+                color = Color.Red
+            )
 
             Row(
                 verticalAlignment = Alignment.CenterVertically
@@ -81,7 +88,7 @@ fun GameScreen(){
                     text = stringResource(R.string.min_slider_value),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(start = 16.dp)
-                    )
+                )
                 Slider(
                     value = 0.5f,
                     valueRange = 0.01f..1f,
@@ -95,15 +102,14 @@ fun GameScreen(){
                     text = stringResource(R.string.max_slider_value),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(end = 16.dp)
-                    )
+                )
             }
             Button(onClick = {
                 alertIsVisible = true
                 Log.i("Alert Visible?", alertIsVisible.toString())
-                number = GenerateRandomNumber() //TODO Move this somewhere else later
-                println("New Number is $number")
-                            }
-                    ) {
+                Log.i("Current Number", num.toString())
+            }
+            ) {
                 Text(
                     text = stringResource(R.string.hit_me_button_text),
                     color = Color.White,
@@ -115,8 +121,11 @@ fun GameScreen(){
         }
         Spacer(modifier = Modifier.weight(0.5f))
 
-        if (alertIsVisible){
-            Text(text = "This is an Alert")
+        if (alertIsVisible) {
+            ResultDialog(
+                hideDialog = {alertIsVisible=false}
+            )
+
         }
     }
 
@@ -130,7 +139,7 @@ fun GameScreenPreview() {
     }
 }
 
-fun GenerateRandomNumber():Int{
-    var number :Int = Random.nextInt(100)
-    return number
+fun GenerateRandomNumber(): Int {
+    var num: Int = Random.nextInt(100)
+    return num
 }
