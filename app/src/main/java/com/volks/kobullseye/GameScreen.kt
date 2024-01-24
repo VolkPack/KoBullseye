@@ -2,6 +2,10 @@ package com.volks.kobullseye
 
 import android.graphics.drawable.GradientDrawable.Orientation
 import android.provider.CalendarContract.Colors
+import android.text.Layout
+import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -24,13 +29,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupPositionProvider
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.volks.kobullseye.ui.theme.KoBullseyeTheme
+import org.w3c.dom.Text
 import kotlin.random.Random
 
 //TEST
 @Composable
 fun GameScreen(){
     var number = GenerateRandomNumber()
+    var alertIsVisible: Boolean = false
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -77,7 +85,7 @@ fun GameScreen(){
                 Slider(
                     value = 0.5f,
                     valueRange = 0.01f..1f,
-                    onValueChange = {},
+                    onValueChange = { },
                     modifier = Modifier.weight(1f)
                 )
                 /**
@@ -90,12 +98,10 @@ fun GameScreen(){
                     )
             }
             Button(onClick = {
-                            /**TODO Add Button Functionality
-                            * Open PopUp
-                            * Check if Number Matches
-                            **/
-
-
+                alertIsVisible = true
+                Log.i("Alert Visible?", alertIsVisible.toString())
+                number = GenerateRandomNumber() //TODO Move this somewhere else later
+                println("New Number is $number")
                             }
                     ) {
                 Text(
@@ -108,6 +114,10 @@ fun GameScreen(){
             }
         }
         Spacer(modifier = Modifier.weight(0.5f))
+
+        if (alertIsVisible){
+            Text(text = "This is an Alert")
+        }
     }
 
 }
