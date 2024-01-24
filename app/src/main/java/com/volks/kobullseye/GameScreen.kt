@@ -43,6 +43,7 @@ import kotlin.random.Random
 fun GameScreen() {
     var number = GenerateRandomNumber()
     var alertIsVisible by remember { mutableStateOf(false) }
+    var sliderValue by remember { mutableStateOf(0.5f) }
     var num by remember { mutableStateOf(Random.nextInt(100)) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,32 +79,12 @@ fun GameScreen() {
                 color = Color.Red
             )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                /**
-                 * Min Slider Value Text
-                 **/
-                Text(
-                    text = stringResource(R.string.min_slider_value),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(start = 16.dp)
-                )
-                Slider(
-                    value = 0.5f,
-                    valueRange = 0.01f..1f,
-                    onValueChange = { },
-                    modifier = Modifier.weight(1f)
-                )
-                /**
-                 * Max Slider Value Text
-                 **/
-                Text(
-                    text = stringResource(R.string.max_slider_value),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(end = 16.dp)
-                )
-            }
+            TargetSlider(
+                value = sliderValue,
+                valueChanged = {value ->
+                    sliderValue = value
+                }
+            )
             Button(onClick = {
                 alertIsVisible = true
                 Log.i("Alert Visible?", alertIsVisible.toString())
