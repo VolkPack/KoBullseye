@@ -1,6 +1,5 @@
 package com.volks.kobullseye
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Slider
