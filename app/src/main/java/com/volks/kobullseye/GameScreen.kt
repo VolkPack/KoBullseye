@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,9 +43,11 @@ import kotlin.random.Random
 @Composable
 fun GameScreen() {
     var number = GenerateRandomNumber()
-    var alertIsVisible by remember { mutableStateOf(false) }
-    var sliderValue by remember { mutableStateOf(0.5f) }
+    var alertIsVisible by rememberSaveable { mutableStateOf(false) }
+    var sliderValue by rememberSaveable { mutableStateOf(0.5f) }
     var num by remember { mutableStateOf(Random.nextInt(100)) }
+    val sliderToInt = (sliderValue *100).toInt()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -58,27 +61,8 @@ fun GameScreen() {
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.weight(9f)
         ) {
-            /**
-             * Instruction Text
-             **/
-            Text(
-                stringResource(R.string.instruction_text),
-                fontWeight = FontWeight.Bold,
-                color = Color.Red,
-                textAlign = TextAlign.Center,
-            )
-            /**
-             * Target Value
-             **/
-            Text(
 
-                //text = stringResource(R.string.target_value_text),
-                text = num.toString(),
-                fontSize = 52.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Red
-            )
-
+            GamePrompt(targetNumber = num)
             TargetSlider(
                 value = sliderValue,
                 valueChanged = {value ->
@@ -104,7 +88,8 @@ fun GameScreen() {
 
         if (alertIsVisible) {
             ResultDialog(
-                hideDialog = {alertIsVisible=false}
+                hideDialog = {alertIsVisible=false},
+                sliderValue = sliderToInt
             )
 
         }
