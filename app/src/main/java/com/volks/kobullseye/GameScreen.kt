@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -23,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.volks.kobullseye.ui.theme.KoBullseyeTheme
+import java.lang.Math.abs
 import kotlin.random.Random
 
 //TEST
@@ -30,8 +30,15 @@ import kotlin.random.Random
 fun GameScreen() {
     var alertIsVisible by rememberSaveable { mutableStateOf(false) }
     var sliderValue by rememberSaveable { mutableStateOf(0.5f) }
-    var num by remember { mutableStateOf(Random.nextInt(100)) }
+    var targetValue by rememberSaveable { mutableStateOf(Random.nextInt(100)) }
     val sliderToInt = (sliderValue * 100).toInt()
+
+    fun pointsForCurrentRound(): Int{
+        val difference = abs(targetValue - sliderToInt)
+        val maxScore = 100
+
+        return maxScore - difference
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,7 +54,7 @@ fun GameScreen() {
             modifier = Modifier.weight(9f)
         ) {
 
-            GamePrompt(targetNumber = num)
+            GamePrompt(targetValue = targetValue)
             TargetSlider(
                 value = sliderValue,
                 valueChanged = { value ->
@@ -57,7 +64,7 @@ fun GameScreen() {
             Button(onClick = {
                 alertIsVisible = true
                 Log.i("Alert Visible?", alertIsVisible.toString())
-                Log.i("Current Number", num.toString())
+                Log.i("Current Number", targetValue.toString())
             }
             ) {
                 Text(
@@ -74,7 +81,8 @@ fun GameScreen() {
         if (alertIsVisible) {
             ResultDialog(
                 hideDialog = { alertIsVisible = false },
-                sliderValue = sliderToInt
+                sliderValue = sliderToInt,
+                points = pointsForCurrentRound()
             )
 
         }
@@ -97,3 +105,4 @@ fun GenerateRandomNumber(): Int {
     val num: Int = Random.nextInt(100)
     return num
 }
+

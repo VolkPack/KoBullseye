@@ -7,5 +7,5 @@
     <string name="target_value_text">%1$d</string>
     <string name="result_dialog_button_text">This is An Alert\n</string>
     <string name="result_dialog_title">Slider Value </string>
-    <string name="result_dialog_message">Your Slider\'s value is %1$d!</string>
+    <string name="result_dialog_message">The slider\'s value is %1$d.\nYou scored %2$d points this round.</string>
 </resources>
