@@ -94,6 +94,6 @@ fun GameScreenPreview() {
  * Random Int Number Generator
  */
 fun GenerateRandomNumber(): Int {
-    var num: Int = Random.nextInt(100)
+    val num: Int = Random.nextInt(100)
     return num
 }
