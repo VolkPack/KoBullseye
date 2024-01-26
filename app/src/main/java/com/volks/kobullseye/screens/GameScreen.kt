@@ -1,10 +1,19 @@
-package com.volks.kobullseye
+package com.volks.kobullseye.screens
+
+/**
+ * TODO LIST COURSE 2
+ * - Implement Multiple Rounds
+ * - Implement Restart the Game
+ * - Implement Background and images - Make it Pretty
+ * - Add the About Screen
+ */
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -19,8 +28,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.volks.kobullseye.R
+import com.volks.kobullseye.components.GameDetail
+import com.volks.kobullseye.components.GamePrompt
+import com.volks.kobullseye.components.ResultDialog
+import com.volks.kobullseye.components.TargetSlider
 import com.volks.kobullseye.ui.theme.KoBullseyeTheme
 import java.lang.Math.abs
 import kotlin.random.Random
@@ -65,16 +80,15 @@ fun GameScreen() {
                 alertIsVisible = true
                 Log.i("Alert Visible?", alertIsVisible.toString())
                 Log.i("Current Number", targetValue.toString())
-            }
-            ) {
+            }) {
                 Text(
                     text = stringResource(R.string.hit_me_button_text),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily.Serif
                 )
-
             }
+            GameDetail(modifier = Modifier.fillMaxWidth())
         }
         Spacer(modifier = Modifier.weight(0.5f))
 
@@ -90,8 +104,7 @@ fun GameScreen() {
 
 }
 
-@Preview(showBackground = true)
-@Composable
+@Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, widthDp = 864, heightDp = 432)@Composable
 fun GameScreenPreview() {
     KoBullseyeTheme {
         GameScreen()

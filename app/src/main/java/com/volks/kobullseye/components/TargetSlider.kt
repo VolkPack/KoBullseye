@@ -1,4 +1,4 @@
-package com.volks.kobullseye
+package com.volks.kobullseye.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.volks.kobullseye.R
 
 @Composable
 fun TargetSlider(
