@@ -43,14 +43,17 @@ import kotlin.random.Random
 //TEST
 @Composable
 fun GameScreen() {
+    fun newTargetValue() = Random.nextInt(1, 100)
+
     var alertIsVisible by rememberSaveable { mutableStateOf(false) }
     var sliderValue by rememberSaveable { mutableStateOf(0.5f) }
-    var targetValue by rememberSaveable { mutableStateOf(Random.nextInt(100)) }
+    var targetValue by rememberSaveable { mutableStateOf(newTargetValue()) }
     val sliderToInt = (sliderValue * 100).toInt()
     var totalScore by rememberSaveable { mutableStateOf(0)}
     var currentRound by rememberSaveable { mutableStateOf(1)}
 
     fun differenceAmmount() = abs(targetValue - sliderToInt)
+
 
     fun pointsForCurrentRound(): Int{
         val maxScore = 100
@@ -62,6 +65,13 @@ fun GameScreen() {
             bonus = 50
         }
         return (maxScore - difference) + bonus
+    }
+
+    fun startNewGame(){
+        totalScore = 0
+        currentRound = 1
+        sliderValue = 0.5f
+        targetValue = newTargetValue()
     }
 
     fun alertTitle(): Int{
@@ -124,7 +134,10 @@ fun GameScreen() {
             GameDetail(
                 totalScore = totalScore,
                 round = currentRound,
-                modifier = Modifier.fillMaxWidth())
+                modifier = Modifier.fillMaxWidth(),
+                onStartOver = {startNewGame()}
+                )
+
         }
         Spacer(modifier = Modifier.weight(0.5f))
 
@@ -136,7 +149,7 @@ fun GameScreen() {
                 points = pointsForCurrentRound(),
                 onRoundIncriment = {
                     currentRound += 1
-                    targetValue =  Random.nextInt(100)
+                    targetValue =  newTargetValue()
                 }
             )
 

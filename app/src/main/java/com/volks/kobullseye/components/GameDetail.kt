@@ -17,13 +17,15 @@ import com.volks.kobullseye.R
 @Composable
 fun GameDetail(
     totalScore: Int = 0,
+    onStartOver: () -> Unit,
     round: Int = 1,
     modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier=modifier) {
-        Button(onClick = { /*TODO*/ }) {
+        //Restart
+        Button(onClick = {onStartOver() }) {
             Text(text = stringResource(R.string.start_over) )
         }
         //Score Widget
@@ -52,5 +54,5 @@ fun GameInfo(label: String, value: Int = 0) {
 @Preview(showBackground = true)
 @Composable
 fun GameDetailPreview(){
-    GameDetail()
+    GameDetail(onStartOver = {})
 }
