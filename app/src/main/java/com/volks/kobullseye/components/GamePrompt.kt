@@ -41,7 +41,6 @@ fun GamePrompt(
          * Target Value
          **/
         Text(
-
             text = stringResource(R.string.target_value_text, targetValue),
             //text = targetNumber.toString(),
             fontSize = 52.sp,

@@ -15,18 +15,21 @@ import androidx.compose.ui.unit.dp
 import com.volks.kobullseye.R
 
 @Composable
-fun GameDetail(modifier: Modifier = Modifier) {
+fun GameDetail(
+    totalScore: Int = 0,
+    round: Int = 1,
+    modifier: Modifier = Modifier) {
     Row(
-        modifier=modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly) {
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier=modifier) {
         Button(onClick = { /*TODO*/ }) {
             Text(text = stringResource(R.string.start_over) )
         }
         //Score Widget
-        GameInfo(label = stringResource(id = R.string.score_label), value = 0)
+        GameInfo(label = stringResource(id = R.string.score_label), value = totalScore)
         //Round Widget
-        GameInfo(label = stringResource(id = R.string.start_over), value = 1)
+        GameInfo(label = stringResource(id = R.string.current_round_label), value = round)
         Button(onClick = { /*TODO*/ }) {
             Text(text = stringResource(R.string.info) )
         }

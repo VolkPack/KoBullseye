@@ -47,13 +47,42 @@ fun GameScreen() {
     var sliderValue by rememberSaveable { mutableStateOf(0.5f) }
     var targetValue by rememberSaveable { mutableStateOf(Random.nextInt(100)) }
     val sliderToInt = (sliderValue * 100).toInt()
+    var totalScore by rememberSaveable { mutableStateOf(0)}
+    var currentRound by rememberSaveable { mutableStateOf(1)}
+
+    fun differenceAmmount() = abs(targetValue - sliderToInt)
 
     fun pointsForCurrentRound(): Int{
-        val difference = abs(targetValue - sliderToInt)
         val maxScore = 100
-
-        return maxScore - difference
+        val difference = differenceAmmount()
+        var bonus = 0
+        if (difference == 0) {
+            bonus = 100
+        } else if (difference == 1) {
+            bonus = 50
+        }
+        return (maxScore - difference) + bonus
     }
+
+    fun alertTitle(): Int{
+
+        val title: Int = when {
+            differenceAmmount() == 0 -> {
+                R.string.alert_title_1
+            }
+            differenceAmmount() < 5 -> {
+                R.string.alert_title_2
+            }
+            differenceAmmount() <= 10 -> {
+                R.string.alert_title_3
+            }
+            else -> {
+                R.string.alert_title_4
+            }
+        }
+        return title
+    }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -76,8 +105,12 @@ fun GameScreen() {
                     sliderValue = value
                 }
             )
+            /**
+             * HitMe Button
+             */
             Button(onClick = {
                 alertIsVisible = true
+                totalScore += pointsForCurrentRound()
                 Log.i("Alert Visible?", alertIsVisible.toString())
                 Log.i("Current Number", targetValue.toString())
             }) {
@@ -88,15 +121,23 @@ fun GameScreen() {
                     fontFamily = FontFamily.Serif
                 )
             }
-            GameDetail(modifier = Modifier.fillMaxWidth())
+            GameDetail(
+                totalScore = totalScore,
+                round = currentRound,
+                modifier = Modifier.fillMaxWidth())
         }
         Spacer(modifier = Modifier.weight(0.5f))
 
         if (alertIsVisible) {
             ResultDialog(
+                dialogTitle = alertTitle(),
                 hideDialog = { alertIsVisible = false },
                 sliderValue = sliderToInt,
-                points = pointsForCurrentRound()
+                points = pointsForCurrentRound(),
+                onRoundIncriment = {
+                    currentRound += 1
+                    targetValue =  Random.nextInt(100)
+                }
             )
 
         }

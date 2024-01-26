@@ -10,7 +10,9 @@ import com.volks.kobullseye.R
 
 @Composable
 fun ResultDialog(
+    dialogTitle: Int,
     hideDialog: () -> Unit,
+    onRoundIncriment: () -> Unit,
     sliderValue: Int,
     points: Int,
     modifier: Modifier = Modifier
@@ -18,17 +20,19 @@ fun ResultDialog(
     AlertDialog(
         onDismissRequest = {
             hideDialog()
+            onRoundIncriment()
         },
         confirmButton = {
             TextButton(
                 onClick = {
                     hideDialog()
+                    onRoundIncriment()
                 }
             ) {
                 Text(stringResource(id = R.string.result_dialog_button_text))
             }
         },
-        title = { Text(stringResource(id = R.string.result_dialog_title)) },
+        title = { Text(stringResource(id = dialogTitle)) },
         text = { Text(stringResource(id = R.string.result_dialog_message, sliderValue, points )) }
        //text = { Text(text = "Slider Value is $sliderValue")}
     )

@@ -5,11 +5,15 @@
     <string name="max_slider_value">100</string>
     <string name="hit_me_button_text">HIT ME</string>
     <string name="target_value_text">%1$d</string>
-    <string name="result_dialog_button_text">This is An Alert\n</string>
-    <string name="result_dialog_title">Slider Value </string>
+    <string name="result_dialog_button_text">Awesome!!!</string>
+    <string name="result_dialog_title">BULL\'S EYE </string>
     <string name="result_dialog_message">The slider\'s value is %1$d.\nYou scored %2$d points this round.</string>
     <string name="start_over">Start Over</string>
     <string name="info">Info</string>
     <string name="score_label">Score</string>
     <string name="current_round_label">Round</string>
+    <string name="alert_title_1">Perfect</string>
+    <string name="alert_title_2">You Almost Had it!</string>
+    <string name="alert_title_3">Not Bad.</string>
+    <string name="alert_title_4">Are You Even Trying?</string>
 </resources>
