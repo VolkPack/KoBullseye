@@ -28,6 +28,7 @@ import com.volks.kobullseye.R
 fun GameDetail(
     totalScore: Int = 0,
     onStartOver: () -> Unit,
+    onNavigateToAbout: () -> Unit,
     round: Int = 1,
     modifier: Modifier = Modifier) {
     Row(
@@ -51,11 +52,10 @@ fun GameDetail(
         GameInfo(label = stringResource(id = R.string.score_label), value = totalScore)
         //Round Widget
         GameInfo(label = stringResource(id = R.string.current_round_label), value = round)
-//        Button(onClick = { /*TODO*/ }) {
-//            Text(text = stringResource(R.string.info) )
-//        }
         FilledIconButton(
-            onClick = { /*TODO*/ },
+            onClick = {
+                      onNavigateToAbout()
+            },
             colors = IconButtonDefaults.filledIconButtonColors(
                 containerColor = MaterialTheme.colorScheme.tertiary
             ),
@@ -89,5 +89,5 @@ fun GameInfo(label: String, value: Int = 0) {
 @Preview(showBackground = true)
 @Composable
 fun GameDetailPreview(){
-    GameDetail(onStartOver = {})
+    GameDetail(onStartOver = {}, onNavigateToAbout = {})
 }

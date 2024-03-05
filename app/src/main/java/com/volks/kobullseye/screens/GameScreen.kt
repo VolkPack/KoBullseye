@@ -2,9 +2,6 @@ package com.volks.kobullseye.screens
 
 /**
  * TODO LIST COURSE 2
- * - Implement Multiple Rounds
- * - Implement Restart the Game
- * - Implement Background and images - Make it Pretty
  * - Add the About Screen
  */
 
@@ -48,7 +45,9 @@ import kotlin.random.Random
 
 //TEST
 @Composable
-fun GameScreen() {
+fun GameScreen(
+    onNavigateToAbout: () -> Unit
+) {
     fun newTargetValue() = Random.nextInt(1, 100)
 
     var alertIsVisible by rememberSaveable { mutableStateOf(false) }
@@ -156,7 +155,8 @@ fun GameScreen() {
                     totalScore = totalScore,
                     round = currentRound,
                     modifier = Modifier.fillMaxWidth(),
-                    onStartOver = { startNewGame() }
+                    onStartOver = { startNewGame() },
+                    onNavigateToAbout = onNavigateToAbout
                 )
 
             }
@@ -184,7 +184,7 @@ fun GameScreen() {
 @Preview(showBackground = true, device = Devices.AUTOMOTIVE_1024p, widthDp = 864, heightDp = 432)@Composable
 fun GameScreenPreview() {
     KoBullseyeTheme {
-        GameScreen()
+        GameScreen(onNavigateToAbout = {})
     }
 }
 
