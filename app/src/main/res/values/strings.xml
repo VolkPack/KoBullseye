@@ -16,4 +16,8 @@
     <string name="alert_title_2">You Almost Had it!</string>
     <string name="alert_title_3">Not Bad.</string>
     <string name="alert_title_4">Are You Even Trying?</string>
+    <string name = "about_btn_desc"> "Go to About Page</string>
+    <string name = "restart_btn_desc"> Restart Game</string>
+    <string name="slider_thumb_desc">Slider Thumb</string>
+    <string name="background_image_desc">Background Image</string>
 </resources>
